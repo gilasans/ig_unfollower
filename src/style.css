@@ -1,0 +1,657 @@
+/* Google Fonts: Plus Jakarta Sans */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        @apply bg-dark-900 text-white;
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+        overflow-x: hidden;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        @apply bg-dark-500 rounded-full;
+    }
+
+    /* Hide scrollbar for mobile feel */
+    body::-webkit-scrollbar {
+        display: none;
+    }
+    body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+@layer components {
+
+    /* ========================================
+       INSTAGRAM GRADIENT BACKGROUNDS
+       ======================================== */
+
+    .ig-gradient {
+        background: linear-gradient(135deg, #833AB4 0%, #E1306C 50%, #F77737 100%);
+    }
+
+    .ig-gradient-soft {
+        background: linear-gradient(135deg, rgba(131,58,180,0.15) 0%, rgba(225,48,108,0.12) 50%, rgba(247,119,55,0.08) 100%);
+    }
+
+    .ig-gradient-text {
+        background: linear-gradient(135deg, #833AB4 0%, #E1306C 50%, #F77737 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .ig-gradient-border {
+        position: relative;
+    }
+
+    .ig-gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1.5px;
+        background: linear-gradient(135deg, #833AB4, #E1306C, #F77737);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+
+    /* Header with Instagram gradient */
+    .header-gradient {
+        background: linear-gradient(165deg, #0A0A0A 0%, #1A0A1E 30%, #1A0A1E 70%, #0A0A0A 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .header-gradient::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+            radial-gradient(ellipse at 20% 50%, rgba(131,58,180,0.15) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 30%, rgba(225,48,108,0.1) 0%, transparent 50%),
+            radial-gradient(ellipse at 60% 80%, rgba(247,119,55,0.08) 0%, transparent 50%);
+        z-index: 0;
+    }
+
+    .header-gradient::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 24px 24px;
+        z-index: 0;
+    }
+
+    /* ========================================
+       GLASS CARDS
+       ======================================== */
+
+    .glass-card {
+        @apply rounded-2xl border;
+        background: rgba(26, 26, 26, 0.8);
+        border-color: rgba(255, 255, 255, 0.06);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.15);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-card:hover {
+        border-color: rgba(131, 58, 180, 0.15);
+        box-shadow: 0 4px 24px rgba(131, 58, 180, 0.1);
+    }
+
+    .glass-card-light {
+        @apply rounded-2xl border;
+        background: rgba(54, 54, 54, 0.5);
+        border-color: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* ========================================
+       STAT CARDS
+       ======================================== */
+
+    .stat-card {
+        @apply glass-card p-4 transition-all duration-300 relative overflow-hidden;
+    }
+
+    .stat-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #833AB4, #E1306C, #F77737);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .stat-card:hover::before {
+        opacity: 1;
+    }
+
+    .stat-card:active {
+        transform: scale(0.97);
+    }
+
+    /* ========================================
+       USER CARD — for displaying usernames
+       ======================================== */
+
+    .user-card {
+        @apply flex items-center gap-3 p-3.5 rounded-2xl transition-all duration-300;
+        background: rgba(26, 26, 26, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .user-card:hover {
+        background: rgba(38, 38, 38, 0.8);
+        border-color: rgba(131, 58, 180, 0.15);
+    }
+
+    .user-card:active {
+        transform: scale(0.98);
+    }
+
+    .user-avatar {
+        @apply w-11 h-11 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0;
+        background: linear-gradient(135deg, #833AB4, #E1306C);
+    }
+
+    .user-avatar-small {
+        @apply w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-[10px] flex-shrink-0;
+        background: linear-gradient(135deg, #833AB4, #E1306C);
+    }
+
+    /* ========================================
+       UPLOAD ZONE
+       ======================================== */
+
+    .upload-zone {
+        @apply rounded-3xl border-2 border-dashed p-8 text-center transition-all duration-300 cursor-pointer relative overflow-hidden;
+        border-color: rgba(131, 58, 180, 0.3);
+        background: rgba(131, 58, 180, 0.04);
+    }
+
+    .upload-zone:hover, .upload-zone.drag-over {
+        border-color: rgba(225, 48, 108, 0.5);
+        background: rgba(131, 58, 180, 0.08);
+        box-shadow: 0 0 40px rgba(131, 58, 180, 0.1);
+    }
+
+    .upload-zone.drag-over {
+        transform: scale(1.01);
+    }
+
+    .upload-zone.has-file {
+        border-color: rgba(34, 197, 94, 0.4);
+        background: rgba(34, 197, 94, 0.06);
+        border-style: solid;
+    }
+
+    .upload-zone.has-file:hover {
+        border-color: rgba(34, 197, 94, 0.6);
+        background: rgba(34, 197, 94, 0.08);
+        box-shadow: 0 0 40px rgba(34, 197, 94, 0.1);
+    }
+
+    /* ========================================
+       BOTTOM NAVIGATION — Floating Island
+       ======================================== */
+
+    .bottom-nav {
+        @apply fixed bottom-0 left-0 right-0 z-50;
+        padding: 0 12px;
+        padding-bottom: max(env(safe-area-inset-bottom), 8px);
+    }
+
+    .bottom-nav-inner {
+        @apply rounded-2xl mx-auto max-w-lg;
+        background: rgba(18, 18, 18, 0.95);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.4);
+        margin-bottom: 4px;
+    }
+
+    .bottom-nav-item {
+        @apply flex flex-col items-center justify-center py-2.5 px-3 transition-all duration-300 relative;
+        color: rgba(255, 255, 255, 0.35);
+    }
+
+    .bottom-nav-item.active {
+        color: #E1306C;
+    }
+
+    .bottom-nav-item.active svg {
+        transform: scale(1.1);
+        filter: drop-shadow(0 2px 6px rgba(225, 48, 108, 0.4));
+    }
+
+    .bottom-nav-item.active::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 24px;
+        height: 3px;
+        background: linear-gradient(90deg, #833AB4, #E1306C);
+        border-radius: 0 0 4px 4px;
+    }
+
+    /* Center scan/upload button */
+    .nav-center-btn {
+        @apply w-12 h-12 -mt-5 rounded-2xl flex items-center justify-center
+               transform transition-all duration-300 active:scale-90;
+        background: linear-gradient(135deg, #833AB4, #E1306C, #F77737);
+        background-size: 200% 200%;
+        animation: gradientShift 4s ease-in-out infinite;
+        box-shadow: 0 4px 20px rgba(225, 48, 108, 0.5);
+    }
+
+    /* ========================================
+       BUTTONS
+       ======================================== */
+
+    .btn-ig {
+        @apply text-white font-semibold py-3.5 px-6 rounded-xl
+               transition-all duration-300 active:scale-95
+               disabled:opacity-50 disabled:cursor-not-allowed;
+        background: linear-gradient(135deg, #833AB4, #E1306C, #F77737);
+        background-size: 200% 200%;
+        animation: gradientShift 6s ease-in-out infinite;
+        box-shadow: 0 4px 14px rgba(225, 48, 108, 0.35);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-ig::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .btn-ig:hover::before {
+        left: 100%;
+    }
+
+    .btn-ig:hover {
+        box-shadow: 0 6px 24px rgba(225, 48, 108, 0.5);
+        transform: translateY(-1px);
+    }
+
+    .btn-ig:active {
+        transform: scale(0.97) translateY(0);
+    }
+
+    .btn-outline {
+        @apply text-white/70 font-semibold py-3 px-5 rounded-xl
+               transition-all duration-300 active:scale-95 border;
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-outline:hover {
+        border-color: rgba(225, 48, 108, 0.3);
+        background: rgba(225, 48, 108, 0.05);
+        color: #E1306C;
+    }
+
+    /* ========================================
+       BADGES
+       ======================================== */
+
+    .badge-unfollowed {
+        @apply text-xs font-bold px-2.5 py-1 rounded-lg;
+        background: rgba(239, 68, 68, 0.15);
+        color: #F87171;
+    }
+
+    .badge-not-following {
+        @apply text-xs font-bold px-2.5 py-1 rounded-lg;
+        background: rgba(251, 146, 60, 0.15);
+        color: #FB923C;
+    }
+
+    .badge-fans {
+        @apply text-xs font-bold px-2.5 py-1 rounded-lg;
+        background: rgba(168, 85, 247, 0.15);
+        color: #A855F7;
+    }
+
+    .badge-mutual {
+        @apply text-xs font-bold px-2.5 py-1 rounded-lg;
+        background: rgba(34, 197, 94, 0.15);
+        color: #22C55E;
+    }
+
+    .badge-new {
+        @apply text-xs font-bold px-2.5 py-1 rounded-lg;
+        background: rgba(59, 130, 246, 0.15);
+        color: #3B82F6;
+    }
+
+    /* ========================================
+       FILTER CHIPS / TABS
+       ======================================== */
+
+    .filter-chip {
+        @apply px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer whitespace-nowrap;
+    }
+
+    .filter-chip.active {
+        @apply text-white;
+        background: linear-gradient(135deg, #833AB4, #E1306C);
+        box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
+    }
+
+    .filter-chip:not(.active) {
+        @apply text-white/50;
+        background: rgba(54, 54, 54, 0.6);
+    }
+
+    .filter-chip:not(.active):hover {
+        @apply text-white/70;
+        background: rgba(54, 54, 54, 0.9);
+    }
+
+    /* ========================================
+       TOAST
+       ======================================== */
+
+    .toast {
+        @apply fixed top-4 left-4 right-4 z-[100] p-4 rounded-2xl
+               text-white font-medium text-sm backdrop-blur-xl;
+        max-width: 480px;
+        margin: 0 auto;
+        animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toast.success {
+        background: linear-gradient(135deg, rgba(34,197,94,0.95), rgba(22,163,74,0.95));
+        box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3);
+    }
+
+    .toast.error {
+        background: linear-gradient(135deg, rgba(239,68,68,0.95), rgba(220,38,38,0.95));
+        box-shadow: 0 8px 24px rgba(239, 68, 68, 0.3);
+    }
+
+    .toast.info {
+        background: linear-gradient(135deg, rgba(131,58,180,0.95), rgba(225,48,108,0.95));
+        box-shadow: 0 8px 24px rgba(225, 48, 108, 0.3);
+    }
+
+    .toast.hide {
+        animation: toastOut 0.3s ease-in forwards;
+    }
+
+    /* ========================================
+       INPUT FIELDS
+       ======================================== */
+
+    .input-field {
+        @apply w-full px-4 py-3 rounded-xl text-white placeholder-white/30 text-sm transition-all duration-300;
+        background: rgba(54, 54, 54, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .input-field:focus {
+        @apply outline-none;
+        background: rgba(54, 54, 54, 0.8);
+        border-color: rgba(225, 48, 108, 0.4);
+        box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.1), 0 2px 8px rgba(225, 48, 108, 0.08);
+    }
+
+    /* ========================================
+       ICON CONTAINERS
+       ======================================== */
+
+    .icon-box {
+        @apply flex items-center justify-center rounded-xl;
+    }
+
+    .icon-box-ig {
+        @apply icon-box;
+        background: linear-gradient(135deg, rgba(131,58,180,0.15), rgba(225,48,108,0.15));
+    }
+
+    .icon-box-danger {
+        @apply icon-box;
+        background: rgba(239, 68, 68, 0.12);
+    }
+
+    .icon-box-success {
+        @apply icon-box;
+        background: rgba(34, 197, 94, 0.12);
+    }
+
+    .icon-box-warning {
+        @apply icon-box;
+        background: rgba(251, 146, 60, 0.12);
+    }
+
+    .icon-box-purple {
+        @apply icon-box;
+        background: rgba(168, 85, 247, 0.12);
+    }
+
+    /* ========================================
+       LOADING & SPINNER
+       ======================================== */
+
+    .spinner {
+        @apply w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin;
+    }
+
+    .spinner-ig {
+        @apply w-8 h-8 rounded-full animate-spin;
+        border: 3px solid rgba(255,255,255,0.1);
+        border-top-color: #E1306C;
+        border-right-color: #833AB4;
+    }
+
+    .skeleton {
+        @apply rounded-xl;
+        background: linear-gradient(90deg,
+            rgba(54,54,54,0.5) 25%,
+            rgba(85,85,85,0.5) 50%,
+            rgba(54,54,54,0.5) 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s linear infinite;
+    }
+
+    /* ========================================
+       PROGRESS BAR
+       ======================================== */
+
+    .progress-bar {
+        @apply h-2 rounded-full overflow-hidden;
+        background: rgba(54, 54, 54, 0.6);
+    }
+
+    .progress-bar-fill {
+        @apply h-full rounded-full transition-all duration-700 ease-out;
+        background: linear-gradient(90deg, #833AB4, #E1306C, #F77737);
+    }
+
+    /* ========================================
+       FLOATING SHAPES (Decorative)
+       ======================================== */
+
+    .floating-shape {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0.06;
+    }
+
+    .floating-shape-1 {
+        width: 300px;
+        height: 300px;
+        top: -100px;
+        right: -80px;
+        background: radial-gradient(circle, #833AB4, transparent 70%);
+        animation: float 8s ease-in-out infinite;
+    }
+
+    .floating-shape-2 {
+        width: 200px;
+        height: 200px;
+        bottom: 20%;
+        left: -60px;
+        background: radial-gradient(circle, #E1306C, transparent 70%);
+        animation: float 10s ease-in-out infinite reverse;
+    }
+
+    .floating-shape-3 {
+        width: 150px;
+        height: 150px;
+        top: 40%;
+        right: 10%;
+        background: radial-gradient(circle, #F77737, transparent 70%);
+        animation: float 7s ease-in-out infinite 1s;
+    }
+
+    /* ========================================
+       MODAL
+       ======================================== */
+
+    .modal-overlay {
+        @apply fixed inset-0 z-[90] flex items-end justify-center;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+    }
+
+    .modal-content {
+        @apply w-full max-w-lg rounded-t-3xl p-6;
+        background: #1A1A1A;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        max-height: 85vh;
+        overflow-y: auto;
+        animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal-handle {
+        @apply w-10 h-1 bg-white/20 rounded-full mx-auto mb-5;
+    }
+
+    /* ========================================
+       EMPTY STATE
+       ======================================== */
+
+    .empty-state {
+        @apply text-center py-12 px-6;
+    }
+
+    .empty-state-icon {
+        @apply w-20 h-20 rounded-3xl flex items-center justify-center mx-auto mb-5;
+        background: rgba(54, 54, 54, 0.5);
+    }
+
+    /* ========================================
+       TIMELINE (History)
+       ======================================== */
+
+    .timeline-item {
+        @apply relative pl-8;
+    }
+
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 36px;
+        bottom: -12px;
+        width: 2px;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .timeline-item:last-child::before {
+        display: none;
+    }
+
+    .timeline-dot {
+        @apply absolute left-0 top-3 w-4 h-4 rounded-full border-2 flex-shrink-0;
+        border-color: #E1306C;
+        background: #1A1A1A;
+    }
+
+    .timeline-dot.active {
+        background: #E1306C;
+        box-shadow: 0 0 8px rgba(225, 48, 108, 0.5);
+    }
+
+    /* ========================================
+       COUNTER ANIMATION
+       ======================================== */
+
+    .count-animate {
+        display: inline-block;
+        animation: countUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    /* ========================================
+       PAGE TRANSITIONS
+       ======================================== */
+
+    .page-content {
+        animation: pageEnter 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    /* ========================================
+       SECTION DIVIDER
+       ======================================== */
+
+    .section-divider {
+        @apply h-px w-full my-4;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    }
+
+    /* ========================================
+       HOW IT WORKS STEP
+       ======================================== */
+    .step-number {
+        @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0;
+        background: linear-gradient(135deg, #833AB4, #E1306C);
+    }
+}
